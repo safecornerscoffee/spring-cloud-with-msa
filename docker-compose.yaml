@@ -1,0 +1,12 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb:10.5
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: msa
+      MARIADB_USER: msa
+      MARIADB_PASSWORD: msa
+      MARIADB_DATABASE: msa
+    ports:
+      - 3306:3306
