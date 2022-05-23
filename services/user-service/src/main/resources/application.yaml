@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: user-service
+
 eureka:
   client:
     service-url:
@@ -11,6 +12,7 @@ eureka:
     enabled: true
   instance:
     preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}:${server.port}
 
 logging:
   level:
