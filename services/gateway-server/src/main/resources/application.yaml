@@ -39,3 +39,4 @@ logging:
   level:
     org.springframework: info
     org.springframework.cloud.gateway: debug
+    reactor.netty.http.client: debug

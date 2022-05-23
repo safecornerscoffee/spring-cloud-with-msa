@@ -1,5 +1,7 @@
 package com.safecornerscoffee.msa.gateway;
 
+import com.safecornerscoffee.msa.gateway.filter.CustomFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,13 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.a
 
 @Configuration
 public class FilterConfig {
+
+    private final CustomFilter customFilter;
+
+    public FilterConfig(CustomFilter customFilter) {
+        this.customFilter = customFilter;
+    }
+
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -29,7 +38,9 @@ public class FilterConfig {
                                 return chain.filter(exchange.mutate().request(request).build());
                             })
                             .addRequestHeader("user-service-request", "user-service-request-header")
-                            .addResponseHeader("user-service-response", "user-service-response-header"))
+                            .addResponseHeader("user-service-response", "user-service-response-header")
+                            .filter(customFilter.apply(config -> {}))
+                        )
                         .uri("lb://user-service"))
                 .route(r ->
                         r.path("/orders/**")

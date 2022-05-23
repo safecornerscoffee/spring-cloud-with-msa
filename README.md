@@ -9,3 +9,4 @@
 > A few remarks about the steps this code went through: Firstly, it calls the addOriginalRequestUrl(), which comes from the ServerWebExchangeUtils class, to store the original URL under the exchange’s attribute GATEWAY_ORIGINAL_REQUEST_URL_ATTR . The value of this attribute is a list to which we’ll append the received URL before going any modification and used internally by the gateway as part of the X-Forwarded-For header’s handling.
 - [Writing Custom Spring Cloud Gateway Filters](https://www.baeldung.com/spring-cloud-custom-gateway-filters)
 - [RewritePath Filter Factory](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-rewritepath-gatewayfilter-factory)
+- [CustomFilter 등록하기](https://wonit.tistory.com/500)
