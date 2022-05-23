@@ -11,7 +11,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR;
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
 
-@Configuration
+//@Configuration
 public class FilterConfig {
 
     private final CustomFilter customFilter;
@@ -20,7 +20,7 @@ public class FilterConfig {
         this.customFilter = customFilter;
     }
 
-    @Bean
+//    @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r ->
