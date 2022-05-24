@@ -1,9 +1,6 @@
 package com.safecornerscoffee.msa.user.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
@@ -17,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 @Accessors(chain = true)
+@ToString
 public class User {
 
     @Id
