@@ -1,9 +1,9 @@
 package com.safecornerscoffee.msa.user.controller;
 
-import com.safecornerscoffee.msa.user.domain.User;
-import com.safecornerscoffee.msa.user.dto.RequestUser;
-import com.safecornerscoffee.msa.user.dto.ResponseUser;
-import com.safecornerscoffee.msa.user.dto.UserDto;
+import com.safecornerscoffee.msa.user.entity.User;
+import com.safecornerscoffee.msa.user.vo.RequestUser;
+import com.safecornerscoffee.msa.user.vo.ResponseUser;
+import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -40,7 +39,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<ResponseUser>> getUsers() {
-        List<User> userList = userService.getUsers();
+        Iterable<User> userList = userService.getUsers();
 
         List<ResponseUser> result = new ArrayList<>();
         userList.forEach(v -> {
@@ -51,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") Long userId) throws UserNotFoundException {
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) throws UserNotFoundException {
         UserDto userDto = userService.getUserById(userId);
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
 

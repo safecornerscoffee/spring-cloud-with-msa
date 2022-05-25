@@ -1,11 +1,10 @@
-package com.safecornerscoffee.msa.user.dto;
+package com.safecornerscoffee.msa.user.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter @Setter
+@Data
 public class ResponseOrder {
     private Long orderId;
     private Long productId;

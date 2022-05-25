@@ -1,10 +1,11 @@
 package com.safecornerscoffee.msa.user.repository;
 
-import com.safecornerscoffee.msa.user.domain.User;
+import com.safecornerscoffee.msa.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findUserById(Long userId);
+public interface UserRepository extends CrudRepository<User, Long> {
+    User findUserByUserId(String userId);
 }

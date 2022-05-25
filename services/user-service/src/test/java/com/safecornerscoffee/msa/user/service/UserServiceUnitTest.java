@@ -1,19 +1,16 @@
 package com.safecornerscoffee.msa.user.service;
 
 
-import com.safecornerscoffee.msa.user.domain.User;
-import com.safecornerscoffee.msa.user.dto.RequestUser;
-import com.safecornerscoffee.msa.user.dto.ResponseUser;
-import com.safecornerscoffee.msa.user.dto.UserDto;
+import com.safecornerscoffee.msa.user.entity.User;
+import com.safecornerscoffee.msa.user.vo.RequestUser;
+import com.safecornerscoffee.msa.user.vo.ResponseUser;
+import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.transaction.annotation.Transactional;
-
-import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
 public class UserServiceUnitTest {

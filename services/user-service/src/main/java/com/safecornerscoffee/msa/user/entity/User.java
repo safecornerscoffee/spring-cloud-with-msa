@@ -1,12 +1,9 @@
-package com.safecornerscoffee.msa.user.domain;
+package com.safecornerscoffee.msa.user.entity;
 
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -18,15 +15,18 @@ import javax.validation.constraints.NotEmpty;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
+    @Column(nullable = false, unique = true)
+    private String userId;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String password;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String username;
 }

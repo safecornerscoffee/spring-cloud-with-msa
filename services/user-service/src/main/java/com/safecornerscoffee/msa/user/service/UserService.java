@@ -1,8 +1,8 @@
 package com.safecornerscoffee.msa.user.service;
 
-import com.safecornerscoffee.msa.user.domain.User;
-import com.safecornerscoffee.msa.user.dto.ResponseOrder;
-import com.safecornerscoffee.msa.user.dto.UserDto;
+import com.safecornerscoffee.msa.user.entity.User;
+import com.safecornerscoffee.msa.user.vo.ResponseOrder;
+import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -28,6 +29,7 @@ public class UserService {
     }
 
     public UserDto createUser(UserDto userDto) {
+        userDto.setUserId(UUID.randomUUID().toString());
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -38,8 +40,8 @@ public class UserService {
         return mapper.map(user, UserDto.class);
     }
 
-    public UserDto getUserById(Long userId) throws UserNotFoundException {
-        User user = userRepository.findUserById(userId);
+    public UserDto getUserById(String userId) throws UserNotFoundException {
+        User user = userRepository.findUserByUserId(userId);
         if (user == null) {
             throw new UserNotFoundException();
         }
@@ -53,7 +55,7 @@ public class UserService {
         return userDto;
     }
 
-    public List<User> getUsers() {
+    public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 }
