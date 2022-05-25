@@ -12,6 +12,13 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/users/**
+        - id: auth-service
+          uri: lb://user-service
+          predicates:
+            - Path=/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
 
         - id: product-service
           uri: lb://product-service

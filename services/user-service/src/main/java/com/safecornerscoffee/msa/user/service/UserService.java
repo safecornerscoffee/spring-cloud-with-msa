@@ -7,6 +7,9 @@ import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +20,25 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByEmail(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(), user.getPassword(),
+                true, true, true, true,
+                new ArrayList<>()
+        );
+    }
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -53,6 +70,12 @@ public class UserService {
         userDto.setOrders(orderList);
 
         return userDto;
+    }
+
+    public UserDto getUserByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(user, UserDto.class);
     }
 
     public Iterable<User> getUsers() {
