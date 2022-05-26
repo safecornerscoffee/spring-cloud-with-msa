@@ -11,7 +11,14 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
+            - Path=/users
+            - Method=POST
+        - id: user-service
+          uri: lb://user-service
+          predicates:
             - Path=/users/**
+          filters:
+            - AuthorizationHeaderFilter
         - id: auth-service
           uri: lb://user-service
           predicates:
@@ -38,8 +45,12 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
+token:
+  secret-key: MGOqyUPSl1buT5e9wwHeyQSriscosvdAKss7UtoCRUk=
+
 logging:
   level:
     org.springframework: info
     org.springframework.cloud.gateway: debug
     reactor.netty.http.client: debug
+    com.safecornerscoffee.msa.gateway: debug

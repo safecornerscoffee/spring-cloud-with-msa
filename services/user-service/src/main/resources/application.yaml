@@ -28,6 +28,10 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}:${server.port}
 
+token:
+  expiration-time: 86400000
+  secret-key: MGOqyUPSl1buT5e9wwHeyQSriscosvdAKss7UtoCRUk=
+
 logging:
   level:
     org.springframework: INFO
