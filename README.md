@@ -2,6 +2,7 @@
 
 ## References
 
+
 ### Spring Cloud Gateway
 - [URL Rewriting With Spring Cloud Gateway](https://www.springcloud.io/post/2022-03/spring-cloud-gateway-url-rewriting/)
 > The RewritePath filter takes two arguments: a regular expression and a replacement string. The filter’s implementation works by simply executing the replaceAll() method on the request’s URI, using the provided parameters as arguments.
@@ -17,3 +18,7 @@
 - [Spring Security without the WebSecurityConfigurerAdapter](https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)
 - [Spring Security - Lambda DSL](https://spring.io/blog/2019/11/21/spring-security-lambda-dsl)
 - [Spring Security is deprecated WebSecurityConfigurerAdapter configuration class](https://www.mo4tech.com/spring-security-is-deprecated-websecurityconfigureradapter-configuration-class.html)
+
+### Spring Cloud Config and Bus
+- [Spring Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/)
+- [Spring Cloud Bus](https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/)

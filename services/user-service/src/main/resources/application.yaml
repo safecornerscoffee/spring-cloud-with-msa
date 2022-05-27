@@ -19,6 +19,9 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.H2Dialect
 
+  config:
+    import: configserver:http://localhost:8888
+
 eureka:
   client:
     service-url:
@@ -28,9 +31,6 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}:${server.port}
 
-token:
-  expiration-time: 86400000
-  secret-key: MGOqyUPSl1buT5e9wwHeyQSriscosvdAKss7UtoCRUk=
 
 logging:
   level:
