@@ -6,6 +6,7 @@ import com.safecornerscoffee.msa.user.vo.ResponseUser;
 import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
@@ -55,5 +53,11 @@ public class UserController {
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ResponseUser> delete(@PathVariable("userId") String userId) {
+        userService.deleteByUserId(userId);
+        return ResponseEntity.noContent().build();
     }
 }

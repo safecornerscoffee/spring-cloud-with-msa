@@ -5,6 +5,7 @@ import com.safecornerscoffee.msa.user.vo.ResponseOrder;
 import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -40,11 +42,7 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
+    @Transactional
     public UserDto createUser(UserDto userDto) {
         userDto.setUserId(UUID.randomUUID().toString());
         ModelMapper mapper = new ModelMapper();
@@ -60,7 +58,7 @@ public class UserService implements UserDetailsService {
     public UserDto getUserById(String userId) throws UserNotFoundException {
         User user = userRepository.findUserByUserId(userId);
         if (user == null) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(userId);
         }
         ModelMapper mapper = new ModelMapper();
         UserDto userDto = mapper.map(user, UserDto.class);
@@ -80,5 +78,32 @@ public class UserService implements UserDetailsService {
 
     public Iterable<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public Iterable<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
+    }
+
+    @Transactional
+    public User deleteById(Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    userRepository.delete(user);
+                    return user;
+                }).orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @Transactional
+    public User deleteByUserId(String userId) {
+        return userRepository.findByEmail(userId)
+            .map(user -> {
+                userRepository.delete(user);
+                return user;
+            }).orElseThrow(() -> new UserNotFoundException(userId));
     }
 }
