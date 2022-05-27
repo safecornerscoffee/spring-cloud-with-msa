@@ -22,6 +22,12 @@ spring:
   config:
     import: configserver:http://localhost:8888
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   client:
     service-url:
@@ -31,6 +37,12 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}:${server.port}
 
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: ["health", "info", "busrefresh"]
 
 logging:
   level:

@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: gateway-server
+  config:
+    import: optional:configserver:http://localhost:8888
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
   cloud:
     gateway:
@@ -45,8 +52,12 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-token:
-  secret-key: MGOqyUPSl1buT5e9wwHeyQSriscosvdAKss7UtoCRUk=
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: ["heath", "info", "busrefresh"]
 
 logging:
   level:
