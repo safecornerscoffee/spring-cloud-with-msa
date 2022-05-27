@@ -48,4 +48,5 @@ logging:
   level:
     org.springframework: INFO
     org.springframework.web: DEBUG
-    com.safecornerscoffee.msa: DEBUG
+    com.safecornerscoffee.msa.user: DEBUG
+    com.safecornerscoffee.msa.user.feign: DEBUG

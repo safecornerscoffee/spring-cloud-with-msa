@@ -1,6 +1,7 @@
 package com.safecornerscoffee.msa.user.service;
 
 import com.safecornerscoffee.msa.user.entity.User;
+import com.safecornerscoffee.msa.user.feign.OrderClient;
 import com.safecornerscoffee.msa.user.vo.ResponseOrder;
 import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
@@ -26,6 +27,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final OrderClient orderClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -55,15 +57,16 @@ public class UserService implements UserDetailsService {
         return mapper.map(user, UserDto.class);
     }
 
-    public UserDto getUserById(String userId) throws UserNotFoundException {
+    public UserDto getUserByUserId(String userId) throws UserNotFoundException {
         User user = userRepository.findUserByUserId(userId);
         if (user == null) {
             throw new UserNotFoundException(userId);
         }
+
         ModelMapper mapper = new ModelMapper();
         UserDto userDto = mapper.map(user, UserDto.class);
 
-        List<ResponseOrder> orderList = new ArrayList<>();
+        List<ResponseOrder> orderList = orderClient.getOrders(userId);
 
         userDto.setOrders(orderList);
 
