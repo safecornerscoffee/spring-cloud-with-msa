@@ -6,4 +6,8 @@ cache:
     - '$HOME/.m2/repository'
 
 services:
-  - rabbitmq
+  - docker
+before_script:
+  - docker-compose up -d
+after_script:
+  - docker-compse down
