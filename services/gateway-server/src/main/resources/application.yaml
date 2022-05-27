@@ -33,7 +33,12 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-
+        - id: user-service
+          uri: lb//user-service
+          predicates:
+            - Path=/users/actuator/**
+          filters:
+            - RewritePath=/users/(?<segment>.*), /$\{segment}
         - id: product-service
           uri: lb://product-service
           predicates:
@@ -57,7 +62,7 @@ management:
     web:
       base-path: /actuator
       exposure:
-        include: ["heath", "info", "busrefresh"]
+        include: ["heath", "info", "busrefresh", "httptrace"]
 
 logging:
   level:
