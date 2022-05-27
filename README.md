@@ -26,3 +26,6 @@
 ### Spring Cloud Config and Bus
 - [Spring Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/)
 - [Spring Cloud Bus](https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/)
+
+### CI/CD
+- [Add coverage in a multi-module Maven project](https://docs.sonarcloud.io/enriching/test-coverage/java-test-coverage/)
