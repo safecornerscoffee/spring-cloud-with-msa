@@ -1,7 +1,8 @@
 # Spring Cloud with MSA
 
 [![Build Status](https://app.travis-ci.com/safecornerscoffee/spring-cloud-with-msa.svg?branch=master)](https://app.travis-ci.com/safecornerscoffee/spring-cloud-with-msa)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=safecornerscoffee_spring-cloud-with-msa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=safecornerscoffee_spring-cloud-with-msa)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=safecornerscoffee_spring-cloud-with-msa&metric=coverage)](https://sonarcloud.io/summary/new_code?id=safecornerscoffee_spring-cloud-with-msa)
 
 [Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA)](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4/)
 
