@@ -45,7 +45,7 @@ $ docker run -it --rm \
 $ docker run -it --rm \
     --network spring-cloud-network \
     -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
-    bitnami/kafka:latest kafka-topics.sh --create --topic topic-name --partitions 1 --bootstrap-server kafka:9092
+    bitnami/kafka:latest kafka-topics.sh --create --topic quickstart --partitions 1 --bootstrap-server kafka:9092
 ```
 
 #### Describe a Topic
@@ -54,6 +54,22 @@ $ docker run -it --rm \
     --network spring-cloud-network \
     -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
     bitnami/kafka:latest kafka-topics.sh --describe --topic topic-name --bootstrap-server kafka:9092
+```
+
+#### Producer and Consumer
+
+```shell
+$ docker run -it --rm \
+    --network spring-cloud-network \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    bitnami/kafka:latest kafka-console-producer.sh --broker-list kafka:9092 --topic quickstart
+```
+
+```shell
+$ docker run -it --rm \
+    --network spring-cloud-network \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    bitnami/kafka:latest kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic quickstart --from-beginning
 ```
 
 ### CI/CD
