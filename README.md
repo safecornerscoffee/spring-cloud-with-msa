@@ -28,5 +28,33 @@
 - [Spring Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/)
 - [Spring Cloud Bus](https://docs.spring.io/spring-cloud-bus/docs/current/reference/html/)
 
+### Kafka
+- [Bitnami Docker Kafka](https://hub.docker.com/r/bitnami/kafka/)
+- [UI for Apache Kafka](https://github.com/provectus/kafka-ui)
+
+#### List of Topics
+```shell
+$ docker run -it --rm \
+    --network spring-cloud-network \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    bitnami/kafka:latest kafka-topics.sh --list  --bootstrap-server kafka:9092
+```
+
+#### Create a Topic
+```shell
+$ docker run -it --rm \
+    --network spring-cloud-network \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    bitnami/kafka:latest kafka-topics.sh --create --topic topic-name --partitions 1 --bootstrap-server kafka:9092
+```
+
+#### Describe a Topic
+```shell
+$ docker run -it --rm \
+    --network spring-cloud-network \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    bitnami/kafka:latest kafka-topics.sh --describe --topic topic-name --bootstrap-server kafka:9092
+```
+
 ### CI/CD
 - [Add coverage in a multi-module Maven project](https://docs.sonarcloud.io/enriching/test-coverage/java-test-coverage/)
