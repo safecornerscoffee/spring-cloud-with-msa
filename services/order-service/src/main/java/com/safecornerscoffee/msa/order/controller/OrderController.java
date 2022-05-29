@@ -1,10 +1,12 @@
 package com.safecornerscoffee.msa.order.controller;
 
 import com.safecornerscoffee.msa.order.entity.OrderEntity;
+import com.safecornerscoffee.msa.order.queue.KafkaProducer;
 import com.safecornerscoffee.msa.order.service.OrderService;
 import com.safecornerscoffee.msa.order.vo.OrderDto;
 import com.safecornerscoffee.msa.order.vo.RequestOrder;
 import com.safecornerscoffee.msa.order.vo.ResponseOrder;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
@@ -16,13 +18,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
-
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final KafkaProducer kafkaProducer;
 
     @PostMapping("/{userId}/orders")
     public ResponseEntity<ResponseOrder> createOrder(@PathVariable("userId") String userId,
@@ -35,6 +35,9 @@ public class OrderController {
         orderDto.setUserId(userId);
         OrderDto createdOrder = orderService.createOrder(orderDto);
         ResponseOrder responseOrder = modelMapper.map(createdOrder, ResponseOrder.class);
+
+        kafkaProducer.send("product-topic", orderDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 
