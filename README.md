@@ -31,6 +31,9 @@
 ### Kafka
 - [Bitnami Docker Kafka](https://hub.docker.com/r/bitnami/kafka/)
 - [UI for Apache Kafka](https://github.com/provectus/kafka-ui)
+- [My Python/Java/Spring/Go/Whatever Client Won’t Connect to My Apache Kafka Cluster in Docker/AWS/My Brother’s Laptop. Please Help!](https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/)
+- [Kafka Listeners – Explained](https://www.confluent.io/blog/kafka-listeners-explained/)
+- [Apache Kafka 101](https://developer.confluent.io/learn-kafka/apache-kafka/events/)
 
 #### List of Topics
 ```shell
