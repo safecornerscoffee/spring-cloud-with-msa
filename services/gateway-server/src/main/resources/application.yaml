@@ -18,6 +18,18 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
+            - Path=/users/actuator/**
+          filters:
+            - RewritePath=/users/(?<segment>.*), /$\{segment}
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/actuator/**
+          filters:
+            - RewritePath=/orders/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://user-service
+          predicates:
             - Path=/users
             - Method=POST
         - id: user-service
@@ -42,18 +54,6 @@ spring:
           uri: lb://order-service
           predicates:
             - Path=/orders/**
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/users/actuator/**
-          filters:
-            - RewritePath=/users/(?<segment>.*), /$\{segment}
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/orders/actuator/**
-          filters:
-            - RewritePath=/orders/(?<segment>.*), /$\{segment}
 
 eureka:
   client:

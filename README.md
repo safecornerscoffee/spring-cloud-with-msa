@@ -78,7 +78,12 @@ $ docker run -it --rm \
 ```
 
 ### Monitoring
-- [https://www.theairtips.com/post/setting-up-grafana-with-docker-compose](https://www.theairtips.com/post/setting-up-grafana-with-docker-compose)
+- [Setting up Grafana with Docker Compose](https://www.theairtips.com/post/setting-up-grafana-with-docker-compose)
+- [Configure a Grafana Docker image](https://grafana.com/docs/grafana/v7.5/administration/configure-docker/)
+- [Provisioning Grafana](https://grafana.com/docs/grafana/latest/administration/provisioning/)
+- [Monitoring Spring Boot projects with Prometheus](https://keepgrowing.in/tools/monitoring-spring-boot-projects-with-prometheus/)
+- [How to set up Grafana with Docker and connect it to Prometheus](https://keepgrowing.in/tools/how-to-set-up-grafana-with-docker-and-connect-it-to-prometheus/)
+- [Grafana provisioning – How to configure data sources and dashboards](https://keepgrowing.in/tools/grafana-provisioning-how-to-configure-data-sources-and-dashboards/)
 
 ### CI/CD
 - [Add coverage in a multi-module Maven project](https://docs.sonarcloud.io/enriching/test-coverage/java-test-coverage/)
