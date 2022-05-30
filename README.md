@@ -77,5 +77,8 @@ $ docker run -it --rm \
     bitnami/kafka:latest kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic quickstart --from-beginning
 ```
 
+### Monitoring
+- [https://www.theairtips.com/post/setting-up-grafana-with-docker-compose](https://www.theairtips.com/post/setting-up-grafana-with-docker-compose)
+
 ### CI/CD
 - [Add coverage in a multi-module Maven project](https://docs.sonarcloud.io/enriching/test-coverage/java-test-coverage/)

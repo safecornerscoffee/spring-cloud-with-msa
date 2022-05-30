@@ -6,6 +6,7 @@ import com.safecornerscoffee.msa.user.vo.ResponseUser;
 import com.safecornerscoffee.msa.user.vo.UserDto;
 import com.safecornerscoffee.msa.user.exception.UserNotFoundException;
 import com.safecornerscoffee.msa.user.service.UserService;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -24,6 +25,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
+    @Timed(value="user.controller.post.create", longTask = true)
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -36,6 +38,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Timed(value="user.controller.get.users", longTask = true)
     public ResponseEntity<List<ResponseUser>> getUsers() {
         Iterable<User> userList = userService.getUsers();
 
@@ -48,6 +51,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
+    @Timed(value="user.controller.get.user", longTask = true)
     public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) throws UserNotFoundException {
         UserDto userDto = userService.getUserByUserId(userId);
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);

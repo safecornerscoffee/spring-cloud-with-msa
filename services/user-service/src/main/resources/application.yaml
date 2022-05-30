@@ -47,7 +47,7 @@ management:
     web:
       base-path: /actuator
       exposure:
-        include: ["health", "info", "busrefresh"]
+        include: ["health", "info", "busrefresh", "refresh", "beans", "prometheus" "metrics"]
 
 logging:
   level:
