@@ -34,6 +34,8 @@
 - [My Python/Java/Spring/Go/Whatever Client Won’t Connect to My Apache Kafka Cluster in Docker/AWS/My Brother’s Laptop. Please Help!](https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/)
 - [Kafka Listeners – Explained](https://www.confluent.io/blog/kafka-listeners-explained/)
 - [Apache Kafka 101](https://developer.confluent.io/learn-kafka/apache-kafka/events/)
+- [Introduction to Connectors, Sinks, and Sources](https://developer.confluent.io/learn-kafka/kafka-connect/intro/)
+- [Deploying Connect On Containers](https://developer.confluent.io/learn-kafka/kafka-connect/docker/)
 
 #### List of Topics
 ```shell

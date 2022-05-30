@@ -53,6 +53,11 @@ services:
     - "19092:8080"
     depends_on:
       - kafka
+  zipkin:
+    image: openzipkin/zipkin
+    restart: always
+    ports:
+      - "9411:9411"
 
 networks:
   default:
